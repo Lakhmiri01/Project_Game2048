@@ -17,24 +17,27 @@ _**This project is about 2048**_ , a single-player sliding tile puzzle video gam
 - ## This repport will describe 
 
 
-1. Game Interface
-   - Describing the components
-   - Starting play
-2. How to Play 2048
-   - The game board in detail
-3. Game logic
+1. [Game Interface](#game-interface)
+   - [Describing the components](#describing-the-components)
+   - [Starting play](#starting-play)
+   - [Undo Button](#undo-button)
+   - [Game Over](#game-over)
+   - [You Win](#you-win)
+2. [How to Play 2048](#how-to-play-2048)
+   - [The game board in details](#the-game-board-in-details)
+3. [Game logic](#game-logic)
 
     - [Moving tiles](#moving-tiles)
-    - Handling collisions and merging 
-    - setting score and next move 
+    - [Handling collisions and merging](#handling-collisions-and-merging)
+    - [Randomtile Function](#randomtile-function)
+    - [Start-Restart Function](#start-restart-function)
+    - [Undo Button Save and Load](#undo-button-save-and-load)
+  
     
-4. Game outcome  
-
-
-
- - ## game interface
+ 
+ - ## Game Interface
    
-   Describing the components :
+   ### Describing the components
    
    1. The undo button (Type Qpushbutton) : allowing to return one move back .
    2. the score board.
@@ -52,7 +55,7 @@ _**This project is about 2048**_ , a single-player sliding tile puzzle video gam
 
 
 
-### undo button
+### Udo Btton
 
 ![image](https://user-images.githubusercontent.com/99057013/152644404-2c1ae66c-88e1-4cc9-9342-e77396fffea8.png)
 
@@ -79,7 +82,7 @@ Moves are performed by shifting all tiles towards one edge – up, down, left, o
 
 ![SHIFTRIGHT](https://user-images.githubusercontent.com/99057013/152644244-718ae4c7-0148-462b-8a9b-536b1f688da5.png)
 
- ### The game board in details 
+ - ### The game board in details 
  In the shape of a square composed of 16 tiles , each one is a RoundedRect reprensenting a case in the double dimension array  . Notice that the colors change corresponding to    the value of the tiles ( the tiles are  by default grey with value of 0  ).
  
 ![image](https://user-images.githubusercontent.com/99057013/152643026-027000dd-a264-4347-88b9-a369a57e136b.png)
@@ -106,10 +109,10 @@ if(board[i][j] == 2){
                p.drawText(QRectF(i*85+78,j*85+120,80,80),QString::number(8),QTextOption(Qt::AlignCenter));            }
 ```
    
-- ## the game logic
+- ## Game logic
 
   
-   the game starts with a random tile of value 2 popping up , after reading  the key pressed by the player ( Z : up S : down A : left D : right ) using KeyPressEvent  the tiles block move in the corresponding direction  assured by 4 movement functions.
+   the game starts with a random tile of value 2 popping up , after reading  the key pressed by the player ( W or Z : up / S : down / A or Q : left / D : right ) using KeyPressEvent  the tiles block move in the corresponding direction  assured by 4 movement functions.
    
 ```c++
  void game::keyPressEvent(QKeyEvent *event)
@@ -141,7 +144,9 @@ if(board[i][j] == 2){
     default:return;//Ignore other Starts
    }
    ```
- - ## Movement Function
+   
+ - ## Moving tiles
+ 
   let's examine a movement function , MoveUp() for example :
   First we iterate trough the board to find movable tiles ( value !=0) and we treat each one individually .
   Second we cross the board  searching for empty tiles in our way ( those with 0 value ),then we start moving the tiles up ( each tiles takes the value of the one beneath  it )   until we hit a full tile.
@@ -178,7 +183,7 @@ The same logic apply to  MoveDown() the difference being iterating in the opposi
             }
          }
 ```
-- ## Handling collisions 
+- ## Handling collisions and merging 
 
 If we hit a tile with different value it stops .
 In case we hit a tile with equal value , the  value of tile in front multiple by 2  and the other one takes 0 , and we continue moving . Of coursethe score increase by the tile value.
@@ -262,7 +267,7 @@ void game::Restart()
 }
 
 ```
-- ## Undo Button
+- ## Undo Button Save and Load
 
 Undo button Give to the player a second chance to Retrieve a move
 
