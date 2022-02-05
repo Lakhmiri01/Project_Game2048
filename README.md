@@ -18,7 +18,10 @@ _**This project is about 2048**_ , a single-player sliding tile puzzle video gam
 
 
 1. Game Interface
+   - Describing the components
+   - Starting play
 2. How to Play 2048
+   - The game board in detail
 3. Game logic
 
     - [Moving tiles](#moving-tiles)
@@ -29,12 +32,11 @@ _**This project is about 2048**_ , a single-player sliding tile puzzle video gam
 
 
 
-   ### game interface
+ - ## game interface
    
    Describing the components :
    
    1. The undo button (Type Qpushbutton) : allowing to return one move back .
-   
    2. the score board.
    3. the replay boutton.
    4. the game board : a double dimension array [4][4] drawn with a Qpainter .
@@ -46,21 +48,9 @@ _**This project is about 2048**_ , a single-player sliding tile puzzle video gam
    
    ![image](https://user-images.githubusercontent.com/99057013/152625094-277cc86e-4642-4c26-b0b3-ad4cc7773a88.png)
    
- ### The game board in details 
- In the shape of a square composed of 16 tiles , each one is a RoundedRect reprensenting a case in the double dimension array  . Notice that the colors change corresponding to    the value of the tiles ( the tiles are  by default grey with value of 0  ).
- 
-![image](https://user-images.githubusercontent.com/99057013/152643026-027000dd-a264-4347-88b9-a369a57e136b.png)
-
-### How to Play 2048
-
-A game of 2048 is played on a 4×4 board. Each position on the board may be empty or may contain a tile, and each tile will have a number on it.
-
-When we start, the board will have two tiles in random locations, each of which either has a “2” or a “4” on it – each has an independent 10% chance of being a “4”, or otherwise a is a “2”.
-
-Moves are performed by shifting all tiles towards one edge – up, down, left, or right. When doing this, any tiles with the same value that are adjacent to each other and are moving together will merge and end up with a new tile equal to the sum of the earlier two:
 
 
-![SHIFTRIGHT](https://user-images.githubusercontent.com/99057013/152644244-718ae4c7-0148-462b-8a9b-536b1f688da5.png)
+
 
 ### undo button
 
@@ -71,10 +61,28 @@ Moves are performed by shifting all tiles towards one edge – up, down, left, o
 If the biggest tile <  2048 and The are no more moves possible (Game Over)
 
 ![final_61fe843b0d713c0109789731_509982](https://user-images.githubusercontent.com/99057013/152645311-4870e44f-3a3a-423a-99d9-527f5b396a7c.gif)
+### You Win
+
 If not, the game then continues until tile = 2048 (Win)
 
 ![final_61fe80f31a3a2d007788cc02_599450](https://user-images.githubusercontent.com/99057013/152645125-dc540615-142f-4e74-9668-666d6aa46e5b.gif)
 
+
+- ## How to Play 2048
+
+A game of 2048 is played on a 4×4 board. Each position on the board may be empty or may contain a tile, and each tile will have a number on it.
+
+When we start, the board will have two tiles in random locations, each of which either has a “2” or a “4” on it – each has an independent 10% chance of being a “4”, or otherwise a is a “2”.
+
+Moves are performed by shifting all tiles towards one edge – up, down, left, or right. When doing this, any tiles with the same value that are adjacent to each other and are moving together will merge and end up with a new tile equal to the sum of the earlier two:
+
+
+![SHIFTRIGHT](https://user-images.githubusercontent.com/99057013/152644244-718ae4c7-0148-462b-8a9b-536b1f688da5.png)
+
+ ### The game board in details 
+ In the shape of a square composed of 16 tiles , each one is a RoundedRect reprensenting a case in the double dimension array  . Notice that the colors change corresponding to    the value of the tiles ( the tiles are  by default grey with value of 0  ).
+ 
+![image](https://user-images.githubusercontent.com/99057013/152643026-027000dd-a264-4347-88b9-a369a57e136b.png)
 
 ```c++
 if(board[i][j] == 2){
@@ -98,19 +106,16 @@ if(board[i][j] == 2){
                p.drawText(QRectF(i*85+78,j*85+120,80,80),QString::number(8),QTextOption(Qt::AlignCenter));            }
 ```
    
-### the game logic .
+- ## the game logic
 
   
    the game starts with a random tile of value 2 popping up , after reading  the key pressed by the player ( Z : up S : down A : left D : right ) using KeyPressEvent  the tiles block move in the corresponding direction  assured by 4 movement functions.
-   ```c++
    
+```c++
  void game::keyPressEvent(QKeyEvent *event)
 {
     if(!state)
        return;
-
-
-
    switch(event->key())
    {
     case Qt::Key_Z:
@@ -133,10 +138,10 @@ if(board[i][j] == 2){
        MoveRight()();
        win();
          break;
-
     default:return;//Ignore other Starts
    }
    ```
+ - ## Movement Function
   let's examine a movement function , MoveUp() for example :
   First we iterate trough the board to find movable tiles ( value !=0) and we treat each one individually .
   Second we cross the board  searching for empty tiles in our way ( those with 0 value ),then we start moving the tiles up ( each tiles takes the value of the one beneath  it )   until we hit a full tile.
@@ -173,7 +178,8 @@ The same logic apply to  MoveDown() the difference being iterating in the opposi
             }
          }
 ```
-Handling collisions :
+- ## Handling collisions 
+
 If we hit a tile with different value it stops .
 In case we hit a tile with equal value , the  value of tile in front multiple by 2  and the other one takes 0 , and we continue moving . Of coursethe score increase by the tile value.
  ```c++
@@ -189,7 +195,7 @@ In case we hit a tile with equal value , the  value of tile in front multiple by
 
          }
 ```
-## Randomtile Function
+- ## Randomtile Function
 
 This fuction generate a tile (2) in a rondom plaid
 
@@ -235,7 +241,7 @@ void game::Randomtile()
 }
 
 ```
-### Start-Restart Function
+- ### Start-Restart Function
 
 ```c++
 void game::Restart()
@@ -256,7 +262,7 @@ void game::Restart()
 }
 
 ```
-## Undo Button
+- ## Undo Button
 
 Undo button Give to the player a second chance to Retrieve a move
 
