@@ -290,3 +290,20 @@ When the undo button is clicked the slot load the last Save
 }
 
 ```
+- ### Game Win
+
+```c++
+ void game::win(){
+     for(int i=0;i<4;i++)
+         for (int j = 0; j < 4; j++) {
+              if(board[i][j]==2048){
+
+
+ winscreen.show();
+ break;
+
+              }
+
+      }
+}
+```
