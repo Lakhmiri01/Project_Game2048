@@ -141,3 +141,19 @@ The same logic apply to  MoveDown() the difference being iterating in the opposi
             }
          }
 ```
+Handling collisions :
+If we hit a tile with different value it stops .
+In case we hit a tile with equal value , the  value of tile in front multiple by 2  and the other one takes 0 , and we continue moving .
+ ```c++
+     for(int i=0;i<4;i++)
+         for(int j=0;j<3;j++){
+             if(board[i][j] == board[i][j+1]){
+                 board[i][j] = board[i][j]*2;
+                 board[i][j+1] = 0;
+                 score += board[i][j];
+                 for(int p=j+2;p<4;p++)
+                     board[i][p-1] = board[i][p];
+             }
+
+         }
+```
