@@ -1,4 +1,7 @@
 # Project_Game2048
+
+# Introduction
+
 _**This project is about 2048**_ , a single-player sliding tile puzzle video game written by Italian web developer Gabriele Cirulli . The objective of the game is to slide numbered tiles on a grid to combine them to create a tile with the number 2048; however, one can continue to play the game after reaching the goal, creating tiles with larger numbers. This article will analyze its source and implementation in detail. 
 
 # 2048 Game
@@ -10,18 +13,19 @@ _**This project is about 2048**_ , a single-player sliding tile puzzle video gam
 
 ![img1](https://dl2.macupdate.com/images/icons256/50935.png?d=1488812134)
 
-list
+
 - ## This repport will describe 
 
 
 1. Game Interface
-2. Game logic
+2. How to Play 2048
+3. Game logic
 
     - [Moving tiles](#moving-tiles)
     - Handling collisions and merging 
     - setting score and next move 
     
-3. Game outcome  
+4. Game outcome  
 
 
 
@@ -42,10 +46,27 @@ list
    
    ![image](https://user-images.githubusercontent.com/99057013/152625094-277cc86e-4642-4c26-b0b3-ad4cc7773a88.png)
    
- the game board in details : 
+ ### The game board in details 
  In the shape of a square composed of 16 tiles , each one is a RoundedRect reprensenting a case in the double dimension array  . Notice that the colors change corresponding to    the value of the tiles ( the tiles are  by default grey with value of 0  ).
  
- ![image](https://user-images.githubusercontent.com/99057013/152626177-a40293e9-b37c-43ec-8c65-f9e1fb4c1baa.png)
+![image](https://user-images.githubusercontent.com/99057013/152643026-027000dd-a264-4347-88b9-a369a57e136b.png)
+
+### How to Play 2048
+
+A game of 2048 is played on a 4×4 board. Each position on the board may be empty or may contain a tile, and each tile will have a number on it.
+
+When we start, the board will have two tiles in random locations, each of which either has a “2” or a “4” on it – each has an independent 10% chance of being a “4”, or otherwise a is a “2”.
+
+Moves are performed by shifting all tiles towards one edge – up, down, left, or right. When doing this, any tiles with the same value that are adjacent to each other and are moving together will merge and end up with a new tile equal to the sum of the earlier two:
+
+
+![SHIFTRIGHT](https://user-images.githubusercontent.com/99057013/152644244-718ae4c7-0148-462b-8a9b-536b1f688da5.png)
+
+### undo button
+
+![image](https://user-images.githubusercontent.com/99057013/152644404-2c1ae66c-88e1-4cc9-9342-e77396fffea8.png)
+
+
 ```c++
 if(board[i][j] == 2){
                 p.setBrush(QColor(238,228,218));
@@ -68,7 +89,9 @@ if(board[i][j] == 2){
                p.drawText(QRectF(i*85+78,j*85+120,80,80),QString::number(8),QTextOption(Qt::AlignCenter));            }
 ```
    
-   the game logic . 
+### the game logic .
+
+  
    the game starts with a random tile of value 2 popping up , after reading  the key pressed by the player ( Z : up S : down A : left D : right ) using KeyPressEvent  the tiles block move in the corresponding direction  assured by 4 movement functions.
    ```c++
    
@@ -157,5 +180,4 @@ In case we hit a tile with equal value , the  value of tile in front multiple by
 
          }
 ```
-# elias
-#fsdfg
+
