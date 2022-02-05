@@ -35,7 +35,8 @@ _**This project is about 2048**_ , a single-player sliding tile puzzle video gam
     - [Start-Restart Function](#start-restart-function)
     - [Undo Button Save and Load](#undo-button-save-and-load)
     - [Game Win](#game-win)
-  
+  5. [Conclusion](#conclusion)
+
     
  
  - ## Game Interface
@@ -188,6 +189,8 @@ Start_restart->setStyleSheet(" background-color: rgb(244,122,102); border-radius
 ```
 
 - ## Game logic
+
+![gamelogic](https://user-images.githubusercontent.com/99057013/152656315-652a98db-19b7-4e2a-af90-69f2a2b4cb57.png)
 
    the game starts with a random tile of value 2 popping up , after reading  the key pressed by the player ( W or Z : up / S : down / A or Q : left / D : right ) using KeyPressEvent  the tiles block move in the corresponding direction  assured by 4 movement functions.
    
@@ -399,13 +402,14 @@ When the undo button is clicked the slot load the last Save
      for(int i=0;i<4;i++)
          for (int j = 0; j < 4; j++) {
               if(board[i][j]==2048){
-
-
  winscreen.show();
  break;
-
-              }
-
-      }
+      }}
 }
 ```
+
+- ### Conclusion
+
+
+
+
