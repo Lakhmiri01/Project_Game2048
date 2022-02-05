@@ -86,12 +86,24 @@ Moves are performed by shifting all tiles towards one edge – up, down, left, o
 ![SHIFTRIGHT](https://user-images.githubusercontent.com/99057013/152644244-718ae4c7-0148-462b-8a9b-536b1f688da5.png)
 
  - ### The game board in details 
- In the shape of a square composed of 16 tiles , each one is a RoundedRect reprensenting a case in the double dimension array  . Notice that the colors change corresponding to    the value of the tiles ( the tiles are  by default grey with value of 0  ).
+ In the shape of a square composed of 16 tiles , each one is a RoundedRect reprensenting a case in the double dimension array  . Notice that the colors change corresponding to    the value of the tiles ( the tiles are  by default grey with value of 0 ).we tried to use two function that can draw a RoundedRect, path.addRoundedRect or p.drawRoundedRect.
  
 ![image](https://user-images.githubusercontent.com/99057013/152643026-027000dd-a264-4347-88b9-a369a57e136b.png)
 
+
 ```c++
-if(board[i][j] == 2){
+ for(int i=0;i<4;i++)
+        for(int j=0;j<4;j++){
+            p.setPen(Qt::transparent);
+            if(board[i][j] == 0){
+              p.setBrush(QColor(204,192,179));
+              p.setRenderHint(QPainter::Antialiasing);
+                path.addRoundedRect(QRectF(i*85+78,j*85+120,80,80), 10, 10);
+                p.fillPath(path, QColor(204,192,179));
+                p.drawPath(path);
+
+            }
+            else if(board[i][j] == 2){
                 p.setBrush(QColor(238,228,218));
                 p.drawRoundedRect(i*85+78,j*85+120,80,80,10,10);
                 p.setPen(QColor(119,110,101));
@@ -110,6 +122,31 @@ if(board[i][j] == 2){
                 p.setPen(QColor(255,255,255));
                 p.setFont(QFont("Helvetica",25,700,false));
                p.drawText(QRectF(i*85+78,j*85+120,80,80),QString::number(8),QTextOption(Qt::AlignCenter));            }
+            else if(board[i][j] == 16){
+                p.setBrush(QColor(245,150,100));
+                p.drawRoundedRect(i*85+78,j*85+120,80,80,10,10);
+                p.setPen(QColor(255,255,255));
+                p.setFont(QFont("Helvetica",25,700,false));
+               p.drawText(QRectF(i*85+78,j*85+120,80,80),QString::number(16),QTextOption(Qt::AlignCenter));            }
+            else if(board[i][j] == 32){
+                p.setBrush(QColor(245,125,95));
+                p.drawRoundedRect(i*85+78,j*85+120,80,80,10,10);
+                p.setPen(QColor(255,255,255));
+                p.setFont(QFont("Helvetica",25,700,false));
+               p.drawText(QRectF(i*85+78,j*85+120,80,80),QString::number(32),QTextOption(Qt::AlignCenter));            }
+            else if(board[i][j] == 64){
+                p.setBrush(QColor (245,95,60));
+                p.drawRoundedRect(i*85+78,j*85+120,80,80,10,10);
+                p.setPen(QColor(255,255,255));
+                p.setFont(QFont("Helvetica",25,700,false));
+               p.drawText(QRectF(i*85+78,j*85+120,80,80),QString::number(64),QTextOption(Qt::AlignCenter));            }
+            else if(board[i][j] == 128){
+                p.setBrush(QColor(237,207,114));
+                p.drawRoundedRect(i*85+78,j*85+120,80,80,10,10);
+                p.setPen(QColor(255,255,255));
+                p.setFont(QFont("Helvetica",25,700,false));
+               p.drawText(QRectF(i*85+78,j*85+120,80,80),QString::number(128),QTextOption(Qt::AlignCenter));            }
+
 ```
    
 
