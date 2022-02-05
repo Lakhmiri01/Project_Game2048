@@ -66,6 +66,15 @@ Moves are performed by shifting all tiles towards one edge – up, down, left, o
 
 ![image](https://user-images.githubusercontent.com/99057013/152644404-2c1ae66c-88e1-4cc9-9342-e77396fffea8.png)
 
+### Game Over
+
+If the biggest tile <  2048 and The are no more moves possible (Game Over)
+
+![final_61fe843b0d713c0109789731_509982](https://user-images.githubusercontent.com/99057013/152645311-4870e44f-3a3a-423a-99d9-527f5b396a7c.gif)
+If not, the game then continues until tile = 2048 (Win)
+
+![final_61fe80f31a3a2d007788cc02_599450](https://user-images.githubusercontent.com/99057013/152645125-dc540615-142f-4e74-9668-666d6aa46e5b.gif)
+
 
 ```c++
 if(board[i][j] == 2){
