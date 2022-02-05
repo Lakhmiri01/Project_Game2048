@@ -410,6 +410,8 @@ When the undo button is clicked the slot load the last Save
 
 - ### Conclusion
 
+2048 is a hugely interesting game to attempt to solve. We learn a lot while solving lot of problems and bugs, so We are so greatfull that you teached us lot of great things.
+GOOD BY AND TAKE CARE.
 
 
 
