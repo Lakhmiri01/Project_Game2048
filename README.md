@@ -189,4 +189,70 @@ In case we hit a tile with equal value , the  value of tile in front multiple by
 
          }
 ```
+## Randomtile Function
 
+This fuction generate a tile (2) in a rondom plaid
+
+- ### Find out empty plaid
+
+```c++
+void game::Randomtile()
+{
+    int i,j;
+   struct Ns n[15];
+   int ni=0;
+   for(i=0;i<4;i++)
+       for(j=0;j<4;j++){
+           if(board[i][j] == 0)
+           {
+               n[ni].i=i;
+               n[ni].j=j;
+               ++ni;
+           }
+       }
+```
+
+- ### Judging whether the game ends
+
+```c++
+  if(ni == 0){
+       for(i=0;i<4;i++)
+           for(j=0;j<3;j++)
+               if(board[i][j] == board[i][j+1])
+                  return;
+       for(j=0;j<4;j++)
+            for(i=0;i<3;i++)
+                if(board[i][j] == board[i+1][j])
+                   return;
+    screen.show();
+
+      return;
+       }
+   int rand = qrand() % (ni);
+
+   board[n[rand].i][n[rand].j] = 2;
+
+}
+
+```
+### Start-Restart Function
+
+```c++
+void game::Restart()
+{
+    screen.hide();
+    winscreen.hide();
+    score = 0;
+    for(int i=0;i<4;i++)
+        for(int j=0;j<4;j++)
+            board[i][j]=0;
+    Start_restart->setText("Replay");
+
+    int randi = qrand() % 4;
+    int randj = qrand() % 4;
+    board[randi][randj] = 2;
+    state = true;
+
+}
+
+```
