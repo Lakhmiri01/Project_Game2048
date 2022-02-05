@@ -106,7 +106,22 @@ if(board[i][j] == 2){
    }
    ```
   let's examine a movement function , MoveUp() for example :
-  First we iterates trough the board to find movable tiles ( value !=0) 
- we iterate trough the board searching for empty tiles in our way ( those with 0 value ),then we start moving the tiles up ( each tiles takes the value of the one beneath   it ) until we hit a full tile.
-   
-
+  First we iterate trough the board to find movable tiles ( value !=0) and we treat each one individually .
+  Second we cross the board  searching for empty tiles in our way ( those with 0 value ),then we start moving the tiles up ( each tiles takes the value of the one beneath  it )   until we hit a full tile.
+  
+ ```c++
+        for(int i=0;i<4;i++)
+         for(int j=1;j<4;j++){
+             if(board[i][j] == 0){
+                 continue;
+             }
+            for(int p=0;p<j;p++){
+                if(board[i][p] == 0)
+                {
+                    board[i][p] = board[i][j];
+                    board[i][j] = 0;
+                    break;
+                }
+            }
+         }
+```
