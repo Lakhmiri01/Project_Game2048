@@ -256,3 +256,37 @@ void game::Restart()
 }
 
 ```
+## Undo Button
+
+Undo button Give to the player a second chance to Retrieve a move
+
+to do this we need to functions (Save,Load)
+
+- ###  Save function
+
+This function is used to save each move in case he choose to retrieve
+
+```C++
+ void game::save(int board[4][4]){
+
+     for(int i=0;i<4;i++)
+         for (int j = 0; j < 4; j++) {
+            grid[i][j]=board[i][j];
+         }
+}
+```
+- ###  Load function
+
+When the undo button is clicked the slot load the last Save
+
+```c++
+
+ void game::load(){
+     for(int i=0;i<4;i++)
+         for (int j = 0; j < 4; j++) {
+             if (score==0) break;
+            board[i][j]=grid[i][j];
+         }
+}
+
+```
