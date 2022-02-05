@@ -125,3 +125,19 @@ if(board[i][j] == 2){
             }
          }
 ```
+The same logic apply to  MoveDown() the difference being iterating in the opposite way . And for moving left or right we act about the i index instead of the j one .
+ ```c++
+     for(int j=0;j<4;j++)
+         for(int i=1;i<4;i++){
+             if(board[i][j] == 0){
+                 continue;//Frontist is empty
+             }
+            for(int p=0;p<i;p++){
+                if(board[p][j] == 0){
+                    board[p][j] = board[i][j];
+                    board[i][j] = 0;
+                    break;
+                }
+            }
+         }
+```
