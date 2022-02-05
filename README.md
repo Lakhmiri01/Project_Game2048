@@ -25,13 +25,16 @@ _**This project is about 2048**_ , a single-player sliding tile puzzle video gam
    - [You Win](#you-win)
 2. [How to Play 2048](#how-to-play-2048)
    - [The game board in details](#the-game-board-in-details)
-3. [Game logic](#game-logic)
 
+3. [Constructor](#constructor)
+
+4. [Game logic](#game-logic)
     - [Moving tiles](#moving-tiles)
     - [Handling collisions and merging](#handling-collisions-and-merging)
     - [Randomtile Function](#randomtile-function)
     - [Start-Restart Function](#start-restart-function)
     - [Undo Button Save and Load](#undo-button-save-and-load)
+    - [Game Win](#game-win)
   
     
  
@@ -55,7 +58,7 @@ _**This project is about 2048**_ , a single-player sliding tile puzzle video gam
 
 
 
-### Udo Btton
+### Undo Button
 
 ![image](https://user-images.githubusercontent.com/99057013/152644404-2c1ae66c-88e1-4cc9-9342-e77396fffea8.png)
 
@@ -109,23 +112,66 @@ if(board[i][j] == 2){
                p.drawText(QRectF(i*85+78,j*85+120,80,80),QString::number(8),QTextOption(Qt::AlignCenter));            }
 ```
    
+
+- ## Constructor
+
+```c++
+game::game(QWidget *parent) :
+      QWidget(parent),score(0),state(false)
+{
+    setStyleSheet("{ background-color: rgb(187,173,160) }");
+    for(int i=0;i<4;i++)
+        for(int j=0;j<4;j++)
+            board[i][j]=0;
+    undo = new QPushButton(this);
+    undo->setGeometry(420,7,80,57);
+    undo->setIconSize((QSize(56,68)));
+    QPixmap* pixmap1 = new QPixmap(":/new/prefix1/undo");
+    QIcon icon1(*pixmap1);
+    undo->setIcon(icon1);
+    undo->setEnabled(false);
+    undo->setEnabled(true);
+    Start_restart = new QPushButton("Start game",this);
+Start_restart->setStyleSheet(" background-color: rgb(244,122,102); border-radius: 10px; font: bold; color: white; ");
+    Start_restart->setGeometry(95,500,300,50);
+    Start_restart->setEnabled(false);
+    Start_restart->setEnabled(true);
+    scr = new QPushButton(this);
+ scr->setGeometry(170,0,145,100);
+    scr->setIconSize((QSize(145,100)));
+    QPixmap* pixmap2 = new QPixmap(":/new/prefix1/scoreboard");
+    QIcon icon2(*pixmap2);
+    scr->setIcon(icon2);
+    scr->setEnabled(false);
+    qsrand(QTime(0, 0, 0).secsTo(QTime::currentTime()));
+    connect(Start_restart,SIGNAL(clicked()),this,SLOT(Start()));
+    connect(undo,SIGNAL(clicked()),this,SLOT(load()));
+}
+
+```
+
 - ## Game logic
 
-  
    the game starts with a random tile of value 2 popping up , after reading  the key pressed by the player ( W or Z : up / S : down / A or Q : left / D : right ) using KeyPressEvent  the tiles block move in the corresponding direction  assured by 4 movement functions.
    
 ```c++
- void game::keyPressEvent(QKeyEvent *event)
+void game::keyPressEvent(QKeyEvent *event)
 {
     if(!state)
        return;
    switch(event->key())
    {
-    case Qt::Key_Z:
+    case Qt::Key_Z  :
        save(board);
        MoveUp();
        win();
          break;
+     case  Qt::Key_W:
+       save(board);
+       MoveUp();
+       win();
+       break;
+
     case Qt::Key_S:
        save(board);
        MoveDown();
@@ -136,13 +182,21 @@ if(board[i][j] == 2){
       MoveLeft();
        win();
        break;
+   case Qt::Key_A:
+       save(board);
+      MoveLeft();
+       win();
+       break;
     case Qt::Key_D:
        save(board);
-       MoveRight()();
+       MoveRight();
        win();
          break;
     default:return;//Ignore other Starts
    }
+   Randomtile();
+   //update();
+}
    ```
    
  - ## Moving tiles
