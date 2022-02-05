@@ -72,7 +72,7 @@ if(board[i][j] == 2){
    the game starts with a random tile of value 2 popping up , after reading  the key pressed by the player ( Z : up S : down A : left D : right ) using KeyPressEvent  the tiles block move in the corresponding direction  assured by 4 movement functions.
    ```c++
    
-   void game::keyPressEvent(QKeyEvent *event)
+ void game::keyPressEvent(QKeyEvent *event)
 {
     if(!state)
        return;
@@ -83,28 +83,30 @@ if(board[i][j] == 2){
    {
     case Qt::Key_Z:
        save(board);
-       PressUp();
+       MoveUp();
        win();
          break;
     case Qt::Key_S:
        save(board);
-       PressDown();
+       MoveDown();
        win();
          break;
     case Qt::Key_Q:
        save(board);
-       PressLeft();
+      MoveLeft();
        win();
        break;
     case Qt::Key_D:
        save(board);
-       PressRight();
+       MoveRight()();
        win();
          break;
 
     default:return;//Ignore other Starts
    }
    ```
-   
+  let's examine a movement function , MoveUp() for example :
+  First we iterates trough the board to find movable tiles ( value !=0) 
+ we iterate trough the board searching for empty tiles in our way ( those with 0 value ),then we start moving the tiles up ( each tiles takes the value of the one beneath   it ) until we hit a full tile.
    
 
